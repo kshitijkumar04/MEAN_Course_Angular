@@ -1,0 +1,50 @@
+<mat-spinner *ngIf='isLoading'></mat-spinner>
+<mat-card style="margin-top: 20px;" >
+    <form [formGroup]='form' (submit) = "onButtonClick()" *ngIf = '!isLoading'>
+        <div>
+            <div class = 'image-preview' *ngIf = "imagePreview !== '' && imagePreview && form.get('image').valid">
+                <img [src] = "imagePreview" [alt]="form.value.title">
+            </div>
+            <button mat-stroked-button type='button' (click)='imagepicker.click()'>Select Image</button>
+            <input type="file" #imagepicker (change) = "imagePicked($event)">
+        </div>
+        <mat-form-field>
+            <input matInput  type="text" formControlName="title" placeholder="Enter Post Title (min length 5)"> 
+            <mat-error *ngIf="form.get('title').invalid">Please enter a title</mat-error>
+           
+        </mat-form-field>
+        <mat-form-field>
+            <textarea matInput formControlName='content'  placeholder="Enter Post Content">
+                </textarea>  
+                <mat-error *ngIf="form.get('content').invalid">Please enter a content</mat-error> 
+        </mat-form-field>  
+        <button mat-raised-button color ="accent" type="submit">Submit Post</button> 
+    </form>
+    
+</mat-card> 
+<!-- <mat-card style="margin-top: 20px;" *ngIf = '!isLoading'>
+    <form #postForm='ngForm' (submit) = "onButtonClick(postForm)">
+        <div>
+            <button mat-stroked-button type='button' (click)='imagepicker.click()'>Select Image</button>
+            <input type="file" #imagepicker>
+        </div>
+        <mat-form-field> -->
+            <!-- When using the ngModel within <form> tags, you'll also need to supply a name attribute
+                 so that the control can be registered with the parent form under that name. -->
+            <!-- <input matInput name= "title" [ngModel]="post?.title" required #title='ngModel' placeholder="Enter Post Title"> -->
+            <!-- To inspect the properties of the associated FormControl (like the validity state),
+            export the directive into a local template variable using ngModel as the key (ex: #myVar="ngModel"). 
+            You can then access the control using the directive's control property. -->
+            <!-- <mat-error *ngIf='title.invalid'>Please enter a title</mat-error>
+        </mat-form-field>
+        
+        <mat-form-field>
+            <textarea matInput name= "content" [ngModel]="post?.content" required #content='ngModel' placeholder="Enter Post Content">
+                </textarea>  
+                <mat-error *ngIf='content.invalid'>Please enter a content</mat-error> 
+        </mat-form-field>  
+        <button mat-raised-button color ="accent" type="submit">Submit Post</button> 
+    </form>
+    
+</mat-card>  -->
+
