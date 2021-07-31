@@ -1,6 +1,20 @@
-<mat-toolbar color="primary">
-   <span><a routerLink=''> My Messages </a></span>
-   <span><a routerLink='/create' style="margin-left: 100%;"> Create Post </a></span>
-   <span class="loginButton"><a routerLink='/login' >Login</a></span>
-   <span ><a routerLink='/signup' >Signup</a></span>
+<!-- <mat-toolbar color="primary">
+   <span ><a mat-button routerLink=''> My Messages </a></span>
+   <span *ngIf="userAuthenticated"><a mat-button routerLink='/create' style="margin-left: 100%;"> Create Post </a></span>
+   <span class="loginButton" *ngIf="!userAuthenticated"><a mat-button routerLink='/login' >Login</a></span>
+   <span ><a mat-button routerLink='/signup' >Signup</a></span>
+   <span><button mat-button *ngIf="userAuthenticated">Logout</button> </span>
+</mat-toolbar> -->
+
+<mat-toolbar color='primary'>
+   <span>
+      <a mat-button routerLink=''> My Messages </a>
+   </span>
+   <span class="spacer"></span>
+   <ul>
+      <li *ngIf="userAuthenticated"> <a mat-button routerLink='/create' routerLinkActive="mat-accent"> Create Post </a></li>
+      <li *ngIf="!userAuthenticated"><a mat-button routerLink='/login' routerLinkActive="mat-accent">Login</a></li>
+      <li *ngIf="!userAuthenticated"><a mat-button routerLink='/signup' routerLinkActive="mat-accent" >Signup</a></li>
+      <button mat-button *ngIf="userAuthenticated" (click)="logout()">Logout</button>
+   </ul>
 </mat-toolbar>
